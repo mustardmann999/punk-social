@@ -11,3 +11,6 @@ class ThanksPage(TemplateView):
 
 class About(TemplateView):
     template_name = 'about.html'
+
+class Deleted(TemplateView):
+    template_name = 'deleted.html'
