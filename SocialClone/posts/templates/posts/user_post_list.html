@@ -1,0 +1,23 @@
+{% extends "posts/post_base.html" %}
+
+<!-- List of user posts, equivalent of profile page -->
+
+{% block prepost %}
+<h1 class="chill pop">@{{post_user.username}}</h1>
+{% endblock %}
+
+{% block post_content %}
+<div class="container">
+  
+  <h3 class="chill pop">Posts:</h3>
+
+  <div class="col-md-8">
+    {% for post in post_list %}
+    {% include "posts/_post.html" %}
+    <br>
+    {% endfor %}
+  </div>
+
+</div>
+
+{% endblock %}

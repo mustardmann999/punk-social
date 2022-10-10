@@ -1,0 +1,38 @@
+/* Master CSS Stylesheet */
+
+/* Navbar class */
+.mynav {}
+
+/* Body content class */
+.mycontent {}
+
+/* Brand Font class */
+.cool {
+  font-family: 'Indie Flower', cursive;
+}
+
+/* Content Font class */
+.chill {
+  font-family: 'Montserrat', sans-serif;
+}
+
+/* White color for word on dark background */
+.pop {
+  color: white;
+}
+
+/* Change link hover to fit theme */
+a:hover {
+  color: #bbbbbb;
+}
+
+/* POSTS CSS */
+
+/* Posts page div */
+.posts-page {}
+
+/* Posts */
+.posts {}
+
+/* Post footer */
+.media-footer {}
