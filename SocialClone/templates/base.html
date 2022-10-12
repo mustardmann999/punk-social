@@ -45,6 +45,7 @@
         <li><a href="{% url 'groups:create' %}">Create Group</a></li>
         <li><a href="{% url 'about'%}">About</a></li>
         <li><a href="{% url 'accounts:logout' %}">Log Out</a></li>
+        <li><a href="{% url 'posts:for_user' username=user %}"><span class="glyphicon glyphicon-user"></span></a></li>
         {% else %}
         <li><a href="{% url 'about'%}">About</a></li>
         <li><a href="{% url 'accounts:login' %}">Log In</a></li>

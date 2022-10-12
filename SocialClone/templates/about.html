@@ -1,22 +1,21 @@
 {% extends "base.html" %}
 
 {% block content %}
-  <div class="jumbotron">
-    <h1 class="cool">Welcome to Punk Social!</h1>
-    <p class="chill">Punk social is a simple social site with the capabities of user
-      registration, encrypted password protection, group creation, and user
-      posting within groups. User capabilities include creating a group,
-      creating a post within a group, editing and deleting their own posts
-      identified by user authentication, and joining/leaving groups. Deleting
-      groups is left is left to admin control. </p>
-    <br>
-    <p class="chill">Django features include, class based views, model based
-      user handling, built in List, Detail, Sign In, Sign Out and Form views,
-      model query for post retrieval, user authentication based html templates,
-      permissionsmixins for CBV, Bootstrap integration, template inheritance, and
-      relative URL linking.</p>
-    <br>
-    <h5 class="chill">Thank you for your visit!</h5>
+<div class="jumbotron">
+  <h1 class="cool">Welcome to Punk Social!</h1>
+  <p class="chill">Punk social is a simple social site with the capabilities of
+    user registration, group creation, and user posting within groups.
+    User capabilities include creating a group, creating a post within a group,
+    editing and deleting their own posts, identified by user authentication,
+    and joining/leaving groups. Deleting groups is left is left to admin control. </p>
+  <br>
+  <p class="chill">Django features include, class based views, model based
+    user handling, built in List, Detail, Sign In, Sign Out and Form views,
+    model query for post retrieval, Argon2 password encryption, user
+    authentication based html templates, permissionsmixins for CBV,
+    Bootstrap integration, template inheritance, and relative URL linking.</p>
+  <br>
+  <h5 class="chill">Thank you for your visit!</h5>
 
-  </div>
+</div>
 {% endblock %}
