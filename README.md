@@ -1,2 +1,2 @@
 # punk-social
- Social site demo
+Social site demo
