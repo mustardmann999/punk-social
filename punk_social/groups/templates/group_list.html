@@ -1,0 +1,105 @@
+{% extends 'base.html' %}{% load crispy_forms_tags %}{% load bootstrap3 %}{% load static %}
+
+{% block bodyblock %}
+{% if user.is_authenticated %}
+
+<!-- Group list page -->
+
+<!-- Page header -->
+<div class="row">
+  <div class="col-lg-12 filled page-header">
+    <h1>Welcome to the Groups Page!</h1>
+    <h4 style="display:inline; float:left;">Create or join chat groups</h4>
+    <h5 style="display:inline; float:right;">Number of groups:
+      <span class="badge">{{object_list.count}}</span>
+    </h5>
+    <br>
+  </div>
+</div>
+<br>
+
+<!-- Groups list content -->
+<div class="row">
+  <!-- User Groups -->
+  <div class="col-md-4">
+    <div class="filled content-block user-groups">
+      <h4 class="text-center" style="margin:5px">@{{user.username}}'s Groups:</h4>
+      <br>
+      <a href="{% url 'groups:create' %}" class="btn btn-sm btn-block btn-primary">
+        <span class="glyphicon glyphicon-plus-sign"></span>
+        Create New Group
+      </a>
+      <br>
+
+      <!-- Created Groups -->
+      <h5 class="text-center" style="margin:5px">Created groups:</h5>
+      <!-- Loop all created groups from user model related_name -->
+      {% for group in user.groups_created.all %}
+        <div class="group-thumbnail">
+          <p>
+            <a href="{% url 'groups:detail' slug=group.slug %}">{{group.name}}</a>
+            <br>
+            <strong>{{group.members.count}}</strong>
+            Member{{group.members.count|pluralize}} |
+            <strong>{{group.posts.count}}</strong>
+            Post{{group.posts.count|pluralize}}
+          </p>
+        </div>
+        <br>
+      {% endfor %}
+
+      <!-- Joined Groups -->
+      <h5 class="text-center" style="margin:5px">Joined Groups:</h5>
+      <!-- Loop all groups filtered by membership and fed in from context dict -->
+      {% for group in user_groups %}
+        <div class="group-thumbnail">
+          <p>
+            <a href="{% url 'groups:detail' slug=group.slug %}">{{group.name}}</a>
+            <br>
+            <strong>{{group.members.count}}</strong>
+            Member{{group.members.count|pluralize}} |
+            <strong>{{group.posts.count}}</strong>
+            Post{{group.posts.count|pluralize}}
+          </p>
+        </div>
+        <br>
+      {% endfor %}
+      <br>
+    </div>
+  </div>
+
+  <!-- All groups list -->
+  <div class="col-md-8 clear">
+    <h3>Groups:</h3>
+    <!-- Loop through all existing groups -->
+    {% for group in object_list %}
+    <a href="{% url 'groups:detail' slug=group.slug %}" class="list-group-item">
+      <h3 class="title list-group-item-heading">{{group.name}}</h3>
+      <div class="list-group-item-text container-fluid group-description">
+        {{group.description_html|safe}}
+        <div class="row">
+          <div class="col-md-4">
+            <span class="badge">{{group.members.count}}</span>
+            Member{{group.members.count|pluralize}}
+            <span class="badge">{{group.posts.count}}</span>
+            Post{{group.posts.count|pluralize}}
+          </div>
+          <div class="col-md-8">
+            <h6 style="text-align:right">Date created: {{group.created_at}}</h6>
+          </div>
+        </div>
+      </div>
+    </a>
+    <!-- If user is author show group edit option -->
+    {% if group in user.groups_created.all %}
+      <a href="{% url 'groups:edit_group' slug=group.slug %}" class="btn btn-primary btn-sm" style="float:right;">Edit Group</a>
+      <br>
+    {% endif %}
+    <br>
+    {% endfor %}
+  </div>
+</div>
+{% endif %}
+<br><br>
+
+{% endblock %}

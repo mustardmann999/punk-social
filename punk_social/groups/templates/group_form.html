@@ -1,0 +1,18 @@
+{% extends 'base.html' %}{% load crispy_forms_tags %}{% load bootstrap3 %}{% load static %}
+{% block bodyblock %}
+
+<!-- Group creation form -->
+<div class="container filled">
+  <h4 class="text-center">Create a new Group!</h4>
+  <fieldset class="form-group">
+    <form action="{% url 'groups:create' %}" method="post" id="groupform">
+      {% csrf_token %}
+      <!-- Group create form -->
+      {{ form|crispy }}
+      <input type="submit" class="btn btn-primary btn-large" value="Create">
+    </form>
+  </fieldset>
+</div>
+<br><br>
+
+{% endblock %}

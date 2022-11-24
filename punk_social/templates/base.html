@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+{% load staticfiles %}
+<html lang="en" dir="ltr">
+
+<!-- Base HTML template for Punk Social project -->
+
+<head>
+  <meta charset="utf-8">
+  <title>Punk Social!</title>
+
+  <!-- Bootstrap links -->
+  <!-- Latest compiled and minified CSS -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+  <!-- Optional theme -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+
+  <!-- Latest compiled and minified JavaScript -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+
+  <!-- Google font -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Indie+Flower&family=Montserrat&display=swap" rel="stylesheet">
+
+  <!-- Master Css -->
+  <link rel="stylesheet" href="{% static 'css/master.css' %}">
+
+  <!-- Background image -->
+  <style>
+    body {
+      background: url({% static 'images/concrete.jpg'%}) no-repeat center center fixed;
+      -webkit-background-size: cover;
+      -moz--background-size: cover;
+      -o--background-size: cover;
+      background-size: cover;
+    }""
+  </style>
+</head>
+
+<body>
+  <!-- Navbar -->
+  <nav class="navbar navbar-default mynav" role="navigation" id="navbar">
+    <div class="container">
+      <a class="navbar-brand indie-font" href="{% url 'home' %}"><strong>Punk Social</strong></a>
+      <ul class="nav navbar-nav navbar-right">
+        <!-- Show navbar options relative to user login status -->
+        {% if user.is_authenticated %}
+        <li><a href="{% url 'posts:create' %}">Post</a></li>
+        <li><a href="{% url 'groups:list' %}">Groups</a></li>
+        <li>
+          <!-- Corner profile picture -->
+          <a href="{% url 'accounts:profile_view' slug=user.profile.slug %}">
+            <div class="text-center profile-corner" style="">
+              <img src="{{user.profile.image.url}}" alt="" style="max-width:100%;" >
+            </div>
+          </a>
+        </li>
+        {% else %}
+        <li><a href="#">About</a></li>
+        <li><a href="{% url 'accounts:login' %}">Log In</a></li>
+        <li><a href="{% url 'accounts:register' %}">Sign Up</a></li>
+        {% endif %}
+      </ul>
+    </div>
+  </nav>
+
+  <div class="container body-block">
+    {% block bodyblock %}
+
+    {% endblock %}
+  </div>
+
+  <!-- Static footer for background credits -->
+  <div class="footer">
+    <small>
+      Page created by Daniel Sales as Django Demo Project!
+      <!-- Concrete (concrete.jpg) -->
+      <a href="https://www.freepik.com/free-photo/solid-concrete-wall-textured-backdrop_17839221.htm#query=black%20background&position=0&from_view=keyword">Image by rawpixel.com</a> on Freepik
+      <!-- Pattern (dark.jpg) -->
+      <!-- <a href="https://www.freepik.com/free-vector/floral-ornamental-abstract-background_6189902.htm#query=black%20background&position=1&from_view=keyword">Image by pikisuperstar</a> on Freepik -->
+    </small>
+  </div>
+</body>
+
+</html>

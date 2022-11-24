@@ -1,0 +1,35 @@
+{% extends 'base.html' %}{% load crispy_forms_tags %}{% load bootstrap3 %}{% load static %}
+{% block bodyblock %}
+
+<!-- Logout page -->
+<!-- Not currently in use! -->
+<div class="container" style="background-color:#ffffff">
+  <h2 class="text-center"><b>Sign In</b></h2>
+  <form class="form-signin" method="POST">
+    {% csrf_token %}
+
+    <fieldset class="form-group">
+      <br>
+      {{ form|crispy }}
+    </fieldset>
+
+    <div class="form-group">
+      <div class="text-center">
+        <button
+          class="btn btn-block btn-primary text-uppercase"
+          type="submit">
+        Logout!
+        </button>
+      </div>
+    </div>
+
+    <small><p class="text-center">
+      Nevermind! I'll
+      <a href="{% url 'accounts:login' %}"><b>Login</b></a>
+      or
+      <a href="{% url 'accounts:register' %}"><b>Register!</b></a>
+    </p></small>
+  </form>
+</div>
+
+{% endblock %}

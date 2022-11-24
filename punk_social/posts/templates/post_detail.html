@@ -1,0 +1,77 @@
+{% extends 'base.html' %}{% load crispy_forms_tags %}{% load bootstrap3 %}{% load static %}
+{% block bodyblock %}
+
+<!-- Post detail page -->
+
+<!-- Page header -->
+<div class="row">
+  <div class="col-lg-12 page-header filled">
+  <h2>Post in group:
+    <a href="{% url 'groups:detail' slug=post.group.slug %}">{{post.group.name}}</a>
+  </h2>
+  <h4>Number of comments: {{post.comments.count}}</h4>
+  <h5>Author: <a href="{% url 'accounts:profile_view' slug=post.user.profile.slug %}">
+    {{post.user.username}}</a>
+  </h5>
+  </div>
+</div>
+<br>
+
+<!-- Post content and comment string -->
+<div class="row">
+  <!-- Post content -->
+  <div class="col-md-8">
+    <!-- Include post -->
+    <div class="post-block">
+      {% include "_post.html" %}
+    </div>
+    <br>
+
+    <!-- Comments -->
+    <div class="clear">
+      <h4>Comments:</h4>
+      <!-- Check for existing comments and loop through them -->
+      {% if post.comments.count == 0 %}
+        <h5>No comments yet!</h5>
+      {% else %}
+        {% for comment in post.comments.all %}
+          <div class="clear comment">
+            <div class="" style="clear: both">
+            <p>
+              <span style="float:left">
+                <strong>@{{comment.username.username}}:</strong>
+              </span>
+              <span style="float:right">{{comment.comment_date}}</span>
+            </p>
+            </div>
+            <br>
+            <p>{{comment.comment_html|safe}}</p>
+          </div>
+          <!-- If user is comment author show delete option -->
+          {% if comment in user.comments.all %}
+            <a href="{% url 'posts:comment_remove' pk=comment.pk %}"
+            class="btn btn-danger btn-xs" style="float:right; margin-top:5px;"
+            onclick="return confirm('Are you sure you want to delete this comment?')">
+              Delete
+            </a>
+            <br>
+          {% endif %}
+        {% endfor %}
+      {% endif %}
+    </div>
+  </div>
+
+  <!-- Comment form -->
+  <div class="col-md-4">
+    <div class="clear">
+    <form class="pop chill" action="" method="post" id="NewCommentForm">
+      {% csrf_token %}
+      {{ form|crispy }}
+      <input type="submit" class="btn btn-primary btn-large" value="Comment">
+    </form>
+    </div>
+  </div>
+</div>
+<br><br>
+
+{% endblock %}

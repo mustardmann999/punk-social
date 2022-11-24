@@ -1,0 +1,46 @@
+{% extends 'base.html' %}{% load crispy_forms_tags %}{% load bootstrap3 %}{% load static %}
+{% block bodyblock %}
+
+<!-- Home page for Punk Social -->
+
+<!-- Welcome header with login and signup option  -->
+<div class="jumbotron">
+  <div class="container">
+    <h1 class="sans-font">Welcome to Punk Social!</h1>
+    {% if not user.is_authenticated %}
+      <h4>Please <a href="{% url 'accounts:login' %}">Login</a> or <a href="#">Sign up!</a></h4>
+    {% endif %}
+  </div>
+</div>
+
+<!-- List of all groups if user is logged in -->
+{% if user.is_authenticated %}
+<div class="clear">
+  <h3>Groups:</h3>
+  {% for group in object_list %}
+  <a href="{% url 'groups:detail' slug=group.slug %}" class="list-group-item">
+    <h3 class="title list-group-item-heading">{{group.name}}</h3>
+    <div class="list-group-item-text container-fluid group-description" >
+      <p>{{group.description_html|safe}}</p>
+      <div class="row">
+        <div class="col-md-4">
+          <span class="badge">{{group.members.count}}</span>
+          Member{{group.members.count|pluralize}}
+          <span class="badge">{{group.posts.count}}</span>
+          Post{{group.posts.count|pluralize}}
+        </div>
+      </div>
+    </div>
+  </a>
+  <!-- If user is group author show delete option -->
+  {% if group in user.groups_created.all %}
+    <a href="{% url 'groups:edit_group' slug=group.slug %}" class="btn btn-primary btn-sm" style="float:right;">Edit Group</a>
+    <br>
+  {% endif %}
+  <br>
+  {% endfor %}
+</div>
+{% endif %}
+<br><br>
+
+{% endblock %}

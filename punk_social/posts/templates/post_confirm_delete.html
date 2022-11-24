@@ -1,0 +1,17 @@
+{% extends 'base.html' %}{% load crispy_forms_tags %}{% load bootstrap3 %}{% load static %}
+{% block bodyblock %}
+
+<!-- Post confirm delete page -->
+
+<div class="jumbotron">
+  <!-- Confirm delete form -->
+  <form method="post">
+    {% csrf_token %}
+    <h2>Are you sure you want to delete this post:</h2>
+    <h5>{{object.content_html|safe}}</h5>
+    <input type="submit" name="" value="Confirm" class="btn btn-danger">
+  </form>
+</div>
+<br><br>
+
+{% endblock %}

@@ -1,0 +1,18 @@
+{% extends 'base.html' %}{% load crispy_forms_tags %}{% load bootstrap3 %}{% load static %}
+{% block bodyblock %}
+
+<!-- Create post form -->
+
+<div class="container filled">
+  <h4>Create a new Post</h4>
+  <!-- Post form -->
+  <form id="postForm" action="{% url 'posts:create' %}" method="post">
+    {% csrf_token %}
+    {{ form|crispy }}
+    <input type="submit" value="Post" class="btn btn-primary btn-large">
+  </form>
+<br>
+</div>
+<br><br>
+
+{% endblock %}

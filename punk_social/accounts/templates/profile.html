@@ -1,0 +1,110 @@
+{% extends 'base.html' %}{% load crispy_forms_tags %}{% load bootstrap3 %}{% load static %}
+
+{% block bodyblock %}
+{% if user.is_authenticated %}
+
+<!-- Profile page -->
+
+<!-- Left column -->
+<div class="col-md-4">
+
+  <!-- Profile info -->
+  <div class="content-block filled profile-info">
+    <h3 class="text-center" style="margin-top:0px;">@{{u.username}}</h3>
+    <div class="text-center profile-image">
+      <img
+        src="{{u.profile.image.url}}" alt="PUNK"
+        class="rounded"
+        style="max-width:100%;"
+      >
+    </div>
+    <p>Portfolio:  <a href="{{u.profile.portfolio_site}}">
+      {{u.profile.portfolio_site}}</a></p>
+    <p>Bio:  {{u.profile.bio}}</p>
+    {% if request.user == u %}
+    <div style="padding:10px">
+      <a class="btn btn-info btn-block btn-sm" href="{% url 'accounts:edit_profile' %}">Edit Profile</a>
+      <a class="btn btn-info btn-block btn-sm" href="{% url 'accounts:logout' %}">Log Out</a>
+    </div>
+    {% endif %}
+  </div>
+  <br><br>
+
+  <!-- User Groups -->
+  <div class="content-block filled user-groups">
+    <h4 class="text-center" style="margin:5px">@{{u.username}}'s Groups:</h4>
+    {% if request.user == u %}
+      <br>
+      <a href="{% url 'groups:create' %}" class="btn btn-sm btn-block btn-primary">
+        <span class="glyphicon glyphicon-plus-sign"></span>
+        Create New Group
+      </a>
+    {% endif %}
+    <br>
+
+    <!-- Created Groups -->
+    <h5 class="text-center" style="margin:5px">Created groups:</h5>
+    <!-- Loop all created groups from user model related_name -->
+    {% for group in u.groups_created.all %}
+      <div class="group-thumbnail">
+        <p>
+          <a href="{% url 'groups:detail' slug=group.slug %}">{{group.name}}</a>
+          <br>
+          <strong>{{group.members.count}}</strong>
+          Member{{group.members.count|pluralize}} |
+          <strong>{{group.posts.count}}</strong>
+          Post{{group.posts.count|pluralize}}
+        </p>
+      </div>
+      <br>
+    {% endfor %}
+
+    <!-- Joined Groups -->
+    <h5 class="text-center" style="margin:5px">Joined Groups:</h5>
+    <!-- Loop all joined groups fed in from context dict -->
+    {% for group in groups %}
+    <div class="group-thumbnail">
+      <p>
+        <a href="{% url 'groups:detail' slug=group.slug %}">{{group.name}}</a>
+        <br>
+        <strong>{{group.members.count}}</strong>
+        Member{{group.members.count|pluralize}} |
+        <strong>{{group.posts.count}}</strong>
+        Post{{group.posts.count|pluralize}}
+      </p>
+    </div>
+    <br>
+    {% endfor %}
+    <br>
+  </div>
+
+<br><br>
+</div>
+
+
+<!-- Right column -->
+<!-- Post list -->
+{% if user.is_authenticated %}
+<div class="col-md-8 clear">
+{% endif %}
+  <h3 class="sans-font">User posts:</h3>
+  <!-- Check if user has made any posts -->
+  {% if u.posts.count == 0 %}
+    <h3>No posts created yet!</h3>
+  {% else %}
+    <!-- Loop through user created posts -->
+    {% for post in posts %}
+      <div class="post-block">
+        {% include "_post.html"%}
+        <br>
+        <p style="display:inline">Post in group: <a href="{% url 'groups:detail' slug=post.group.slug %}">{{post.group}}</a></p>
+        <p style="display:inline; float:right">Date: {{post.date_posted}}</p>
+      </div>
+      <br>
+    {% endfor %}
+  {% endif %}
+</div>
+<br><br>
+
+{% endif %}
+{% endblock %}

@@ -1,0 +1,177 @@
+/* Master CSS for Punk Social */
+
+/*** Header ***/
+
+/* Nav bar class */
+.mynav {}
+
+.mynav a {
+  font-family: 'Montserrat', sans-serif;
+}
+
+/* Profile Corner (Profile pic)*/
+.profile-corner {
+  float:center;
+  width:20px;
+  height:20px;
+  border:1px solid black;
+  border-radius:10px;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/*** Body Block ***/
+
+/* Fonts */
+/* Brand Font class */
+.indie-font {
+  font-family: 'Indie Flower', cursive;
+}
+/* Content Font class */
+.sans-font {
+  font-family: 'Montserrat', sans-serif;
+}
+
+/* Profile */
+.profile-image {
+  float:center;
+  width:160px;
+  height:160px;
+  border:2px solid black;
+  border-radius:80px;
+  margin-bottom:10px;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-left:auto;
+  margin-right:auto;
+}
+.profile-info {
+  font-family: 'Montserrat', sans-serif;
+}
+.profile-info p {
+  padding:5px;
+  margin-bottom:0px;
+}
+
+/* Content blocks */
+.body-block {
+  background-color: rgba(255, 255, 255, 0.0);
+}
+.body-block:hover {
+
+}
+.content-block {
+  padding:10px;
+}
+.filled {
+  background-color: rgba(255, 255, 255, 1.0);
+}
+.clear {
+  background-color: rgba(255, 255, 255, 0.0);
+  color: rgba(255, 255, 255, 1.0);
+}
+
+/* Group styling */
+.page-header {
+  padding: 10px 20px;
+  border-radius: 5px;
+  font-family: 'Montserrat', sans-serif;
+  margin-left: 0px;
+  margin-right: 0px;
+  margin-top:5px;
+}
+
+.group-header h1,h2,h3,h4,h5,h6  {
+  font-family: 'Montserrat', sans-serif;
+}
+
+.user-groups {
+  font-family: 'Montserrat', sans-serif;
+}
+.group-description {
+  font-family: 'Montserrat', sans-serif;
+}
+.group-description p {
+  margin-top:0px;
+  padding-top:0px;
+}
+.group-thumbnail {
+  border: 1px solid #cccccc;
+  padding:10px 20px;
+}
+.group-thumbnail p {
+  margin:0px;
+}
+.group-thumbnail strong {
+  font-family: Georgia, serif;
+}
+.mybadge {
+  padding:2px 8px;
+  /* text-align:center; */
+  color:white;
+  background-color:#666666;
+  border-radius:10px;
+}
+
+/* Post styling */
+.post-block {
+  background-color: rgba(255, 255, 255, 0.0);
+  color: rgba(255, 255, 255, 1.0);
+  border: 1px solid white;
+  border-radius: 5px;
+  padding:10px;
+  font-family: 'Montserrat', sans-serif;
+}
+.post-block a {
+  color: rgba(255, 255, 255, 1.0);
+}
+.post-block a:hover {
+  color: rgba(220, 200, 255, 1.0);
+}
+
+.post-content {
+  background-color: rgba(255, 255, 255, 0.0);
+  color: rgba(255, 255, 255, 1.0);
+  border: 0px solid white;
+  border-radius:5px;
+}
+.post-content a {
+  display: block;
+  padding: 10px 20px;
+  background-color: rgba(255, 255, 255, 0.0);
+  color: rgba(255, 255, 255, 1.0);
+}
+.post-content a:hover {
+  background-color: rgba(255, 255, 255, 0.1);
+  color: rgba(255, 255, 255, 1.0);
+}
+.comment {
+  font-family: 'Montserrat', sans-serif;
+  margin-left:20px;
+  margin-right:20px;
+  margin-top:20px;
+  border-bottom: 1px solid #cccccc;
+}
+
+/*** Footer ***/
+
+.footer {
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  background-color: rgba(255, 255, 255, 0.05);
+  color: rgba(255, 255, 255, 0.5);
+  text-align: center;
+}
+
+.footer a {
+  color: rgba(255, 255, 255, 0.5);
+}
+.footer a:hover {
+  color: rgba(255, 255, 255, 0.7);
+}

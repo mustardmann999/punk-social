@@ -1,0 +1,75 @@
+{% extends 'base.html' %}{% load crispy_forms_tags %}{% load bootstrap3 %}{% load static %}
+{% block bodyblock %}
+
+<!-- Group detail page -->
+
+<div class="row">
+  <div class="col-lg-12">
+    <!-- Page header -->
+    <div class="content-block filled page-header">
+      <h1>Group: {{group.name}}</h1>
+      <h4>Member Count: {{group.members.count}}</h4>
+      <h5>Author: <a href="{% url 'accounts:profile_view' slug=group.created_by.profile.slug %}">{{group.created_by}}</a></h5>
+
+      <div class="content">
+        <!-- If user is inside list of members show create post or leave group -->
+        {% if user in group.members.all %}
+          <a href="{% url 'posts:create' %}"
+            class="btn btn-fill btn-info btn-sm chill"><span
+            class="glyphicon glyphicon-ok-circle"></span> Create Post</a>
+
+          <a href="{% url 'groups:leave' slug=group.slug %}"
+            class="btn btn-fill btn-warning btn-sm chill"><span
+            class="glyphicon glyphicon-remove-circle"></span> Leave</a>
+        <!-- Otherwise show join group option -->
+        {% else %}
+          <a href="{% url 'groups:join' slug=group.slug %}"
+            class="btn btn-fill btn-default btn-sm chill"><span
+            class="glyphicon glyphicon-ok-circle"></span> Join</a>
+        {% endif %}
+        <!-- If user is author show delete group option -->
+        {% if request.user == group.created_by %}
+          <a href="{% url 'groups:delete' slug=group.slug %}"
+            class="btn btn-fill btn-danger btn-sm chill"><span
+            class="glyphicon glyphicon-remove-circle"></span> Delete</a>
+        {% endif %}
+      </div>
+      <br>
+    </div>
+  </div>
+</div>
+
+<div class="row">
+  <!-- Group info left col -->
+  <div class="col-md-4">
+    <div class="clear group-description">
+      <h2>Group info:</h2>
+      <h6>Description: {{group.description_html|safe}}</h6>
+      <h6>Number of posts: {{group.posts.count}}</h6>
+      <h6>Date created: {{group.created_at}}</h6>
+    </div>
+  </div>
+  <!-- Post list right col -->
+  <div class="col-md-8">
+    <div class="clear">
+      <h2>Posts:</h2>
+      <!-- Check if there are existing posts then list them -->
+      {% if group.posts.count == 0 %}
+        <h2 class="">No posts in this group yet!</h2>
+      {% else %}
+        {% for post in group.posts.all %}
+        <div class="post-block">
+          {% include "_post.html"%}
+          <br>
+          <p style="display:inline; float:right">Date: {{post.date_posted}}</p>
+          <br>
+        </div>
+        <br>
+        {% endfor %}
+      {% endif %}
+    </div>
+  </div>
+</div>
+<br><br>
+
+{% endblock %}

@@ -1,0 +1,33 @@
+{% extends 'base.html' %}{% load crispy_forms_tags %}{% load bootstrap3 %}{% load static %}
+{% block bodyblock %}
+
+<!-- Profile update page -->
+<div class="container filled">
+  <div class="row">
+    <div class="col-lg-12 mx-auto">
+      <h5 class="text-center"><b>Update Profile</b></h5>
+      <form method="POST" enctype="multipart/form-data">
+        {% csrf_token %}
+        <fieldset class="form-group">
+          <br>
+          <!-- User update and profile update forms -->
+          {{ u_form|crispy }} {{ p_form|crispy }}
+        </fieldset>
+        <div class="form-group">
+          <button
+            class="btn btn-primary btn-block text-uppercase"
+            type="submit"
+          >
+          Update</button>
+          <br>
+          <a
+            class="btn btn-warning btn-block text-uppercase"
+            href="#"
+            >Go Back</a
+            >
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+{% endblock %}
