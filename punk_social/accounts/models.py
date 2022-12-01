@@ -9,10 +9,10 @@ from autoslug import AutoSlugField
 ### Accounts models ###
 
 # Profile model created upon base user registration
-# Dependent on base user model 
+# Dependent on base user model
 class Profile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
-    image = models.ImageField(default='punk.jpg', upload_to='profile_pics')
+    image = models.ImageField(default='images/punk.jpg', upload_to='profile_pics')
     slug = AutoSlugField(populate_from='user',unique=True)
     bio = models.CharField(max_length=255, blank=True)
     portfolio_site = models.URLField(blank=True)

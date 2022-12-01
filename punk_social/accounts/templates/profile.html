@@ -11,6 +11,10 @@
   <!-- Profile info -->
   <div class="content-block filled profile-info">
     <h3 class="text-center" style="margin-top:0px;">@{{u.username}}</h3>
+    <!-- Here to check image URL -->
+    <!-- <script type="text/javascript">
+      document.write("{{u.profile.image.url}}");
+    </script> -->
     <div class="text-center profile-image">
       <img
         src="{{u.profile.image.url}}" alt="PUNK"
@@ -45,7 +49,37 @@
     <!-- Created Groups -->
     <h5 class="text-center" style="margin:5px">Created groups:</h5>
     <!-- Loop all created groups from user model related_name -->
-    {% for group in u.groups_created.all %}
+    {% if u.groups_created.count == 0 %}
+      <div class="group-thumbnail">
+        <p>No groups created yet!</p>
+      </div>
+      <br>
+    {% else %}
+      {% for group in u.groups_created.all %}
+        <div class="group-thumbnail">
+          <p>
+            <a href="{% url 'groups:detail' slug=group.slug %}">{{group.name}}</a>
+            <br>
+            <strong>{{group.members.count}}</strong>
+            Member{{group.members.count|pluralize}} |
+            <strong>{{group.posts.count}}</strong>
+            Post{{group.posts.count|pluralize}}
+          </p>
+        </div>
+        <br>
+      {% endfor %}
+    {% endif %}
+
+    <!-- Joined Groups -->
+    <h5 class="text-center" style="margin:5px">Joined Groups:</h5>
+    <!-- Loop all joined groups fed in from context dict -->
+    {% if groups.count == 0 %}
+      <div class="group-thumbnail">
+        <p>No groups joined yet!</p>
+      </div>
+      <br>
+    {% else %}
+      {% for group in groups %}
       <div class="group-thumbnail">
         <p>
           <a href="{% url 'groups:detail' slug=group.slug %}">{{group.name}}</a>
@@ -57,25 +91,8 @@
         </p>
       </div>
       <br>
-    {% endfor %}
-
-    <!-- Joined Groups -->
-    <h5 class="text-center" style="margin:5px">Joined Groups:</h5>
-    <!-- Loop all joined groups fed in from context dict -->
-    {% for group in groups %}
-    <div class="group-thumbnail">
-      <p>
-        <a href="{% url 'groups:detail' slug=group.slug %}">{{group.name}}</a>
-        <br>
-        <strong>{{group.members.count}}</strong>
-        Member{{group.members.count|pluralize}} |
-        <strong>{{group.posts.count}}</strong>
-        Post{{group.posts.count|pluralize}}
-      </p>
-    </div>
-    <br>
-    {% endfor %}
-    <br>
+      {% endfor %}
+    {% endif %}
   </div>
 
 <br><br>

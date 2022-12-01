@@ -1,4 +1,6 @@
 <!-- HTML code for individual posts to inject into post views -->
+
+<!-- Post content from model -->
 <div class="post-content">
   <a href="{% url 'posts:detail' username=post.user.username pk=post.pk %}"
     class="">
@@ -6,16 +8,17 @@
   </a>
 </div>
 
+<!-- Post footer -->
 <h5 class="media-footer" style="padding-top:0px; padding-left:10px; margin-bottom:0px;">
-
-  <span class="username pop">
-    <!-- Clicking name shows profile -->
+  <span class="username">
+    <!-- Username is profile link -->
     <a class="" href="{% url 'accounts:profile_view' slug=post.user.profile.slug %}"><strong>@{{post.user.username}}</strong></a>
   </span>
   <time class="time" style="padding-left:10px">
     {{post.created_at}}
   </time>
 
+  <!-- If user is post author show delete option -->
   {% if user.is_authenticated and post.user == user %}
   <a href="{% url 'posts:delete' pk=post.pk %}" title="delete" class="btn btn-default btn-xs pull-right">
     <span class="glyphicon glyphicon-remove text-danger" aria-hidden="true"></span>

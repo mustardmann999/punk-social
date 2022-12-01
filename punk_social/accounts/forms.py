@@ -5,8 +5,15 @@ from .models import Profile
 
 ### Accounts forms ###
 
+def validate_email(value):
+    if User.objects.filter(email = value).exists():
+        raise forms.ValidationError(
+            ("An account exists with this email. Please enter a unique email."),
+            params = {'value':value}
+        )
+
 class UserRegisterForm(UserCreationForm):
-	email = forms.EmailField()
+	email = forms.EmailField(validators = [validate_email])
 
 	class Meta:
 		model = User
