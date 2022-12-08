@@ -5,3 +5,6 @@ from django.views.generic import ListView
 class HomePage(ListView):
     model = Group
     template_name = 'home.html'
+
+class AboutView(TemplateView):
+    template_name = 'about.html'

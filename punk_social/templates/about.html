@@ -1,0 +1,33 @@
+{% extends 'base.html' %}{% load crispy_forms_tags %}{% load bootstrap3 %}{% load static %}
+{% block bodyblock %}
+
+<!-- About page for Punk Social -->
+
+<!-- Welcome header with login and signup option  -->
+<div class="jumbotron">
+  <div class="container">
+    <h1 class="sans-font">About Punk Social!</h1>
+    <p class="">Punk Social is a simple social site used as a CRUD project
+      demonstration. The idea is to create groups within Punk Social, join groups,
+      and post within these groups with relevant information. One can only post
+      in a group that they belong to. Although this is true, all groups are public
+      and all posts made by a user can be seen on their profile page. The profile
+      also displays groups that the user has authored and joined. Only the group
+      author can delete a group. Likewise, only a post or comment author can delete
+      their own content.
+    </p>
+    <p class="">
+      This project uses the Django user model and couples a separate created model
+      which allows the user to customize their profile including a profile picture,
+      user bio, and portfolio site link. Both generic class based views and custom
+      function views are used. Models are built using SQLite and views display
+      SQLite query skills. This project also uses features such as Bootstrap
+      integration, template inheritance, permissions based views, relative URL
+      linking, and custom form validation.
+    </p>
+    <h5 class="">Thank you for your visit!</h5>
+  </div>
+</div>
+
+
+{% endblock %}

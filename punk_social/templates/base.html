@@ -49,6 +49,7 @@
         {% if user.is_authenticated %}
         <li><a href="{% url 'posts:create' %}">Post</a></li>
         <li><a href="{% url 'groups:list' %}">Groups</a></li>
+        <li><a href="{% url 'about' %}">About</a></li>
         <li>
           <!-- Corner profile picture -->
           <a href="{% url 'accounts:profile_view' slug=user.profile.slug %}">
@@ -58,7 +59,7 @@
           </a>
         </li>
         {% else %}
-        <li><a href="#">About</a></li>
+        <li><a href="{% url 'about' %}">About</a></li>
         <li><a href="{% url 'accounts:login' %}">Log In</a></li>
         <li><a href="{% url 'accounts:register' %}">Sign Up</a></li>
         {% endif %}
