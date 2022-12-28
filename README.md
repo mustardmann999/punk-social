@@ -46,7 +46,7 @@ and use django's runserver command to initialize the locally hosted project and
 navigate to 'http://127.0.0.1:8000/'.
 
 ```sh
-(env)$ cd project
+(env)$ cd punk-social
 (env)$ python manage.py runserver
 ```
 Once the project is running and open on a browser, create a user profile, log in
