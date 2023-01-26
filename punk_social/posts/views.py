@@ -91,22 +91,3 @@ def comment_remove(request,pk):
     post_pk = comment.post.pk
     comment.delete()
     return redirect('posts:detail',pk=post_pk, username=username)
-
-# Like use still in development
-@login_required
-def like(request):
-    post_id = request.GET.get("likeId", "")
-    user = request.user
-    post = Post.objects.get(pk=post_id)
-    liked = False
-    like = Like.objects.filter(user=user, post=post)
-    if like:
-        like.delete()
-    else:
-        liked = True
-        Like.objects.create(user=user, post=post)
-    resp = {
-        'liked':liked
-    }
-    response = json.dumps(resp)
-    return HttpResponse(response, content_type = "application/json")

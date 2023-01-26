@@ -62,6 +62,8 @@
   </div>
 
   <!-- Comment form -->
+
+  {% if user in post.group.members.all %}
   <div class="col-md-4">
     <div class="clear">
     <form class="pop chill" action="" method="post" id="NewCommentForm">
@@ -71,6 +73,7 @@
     </form>
     </div>
   </div>
+  {% endif %}
 </div>
 <br><br>
 
